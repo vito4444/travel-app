@@ -30,6 +30,28 @@ jobs:
             ONLY_ACTIVE_ARCH=NO \
             build 2>&1 | tail -60
 
+      - name: 构建真机未签名 ipa（供侧载）
+        run: |
+          set -eo pipefail
+          xcodebuild \
+            -project TripKeeper.xcodeproj \
+            -target TripKeeper \
+            -configuration Release \
+            -sdk iphoneos \
+            SYMROOT="$PWD/build-ios" \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tail -30
+          mkdir -p ipa/Payload
+          cp -R build-ios/Release-iphoneos/TripKeeper.app ipa/Payload/
+          cd ipa && zip -qry TripKeeper-unsigned.ipa Payload
+
+      - name: 上传 ipa
+        uses: actions/upload-artifact@v4
+        with:
+          name: TripKeeper-unsigned-ipa
+          path: ipa/TripKeeper-unsigned.ipa
+          if-no-files-found: error
+
       - name: 启动模拟器并截图
         run: |
           set -euxo pipefail
