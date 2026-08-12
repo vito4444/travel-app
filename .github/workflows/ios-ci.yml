@@ -57,8 +57,8 @@ jobs:
           xcrun simctl io "$UDID" screenshot shots/02-trip-detail.png
           xcrun simctl terminate "$UDID" com.tripkeeper.app || true
 
-          xcrun simctl launch "$UDID" com.tripkeeper.app -demoData -openFirstTrip -openMap
-          sleep 25
+          xcrun simctl launch "$UDID" com.tripkeeper.app -demoData -openFirstTrip -openMap -mapDay 1
+          sleep 40
           xcrun simctl io "$UDID" screenshot shots/03-route-map.png
 
       - name: 上传截图

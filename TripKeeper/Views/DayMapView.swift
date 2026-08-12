@@ -215,6 +215,14 @@ struct DayMapView: View {
     // MARK: - 逻辑
 
     private func selectDefaultDay() {
+        // CI 截图用：`-mapDay N` 启动参数强制选中第 N+1 天。
+        let args = ProcessInfo.processInfo.arguments
+        if let flagIndex = args.firstIndex(of: "-mapDay"),
+           flagIndex + 1 < args.count,
+           let forced = Int(args[flagIndex + 1]) {
+            selectedDay = min(max(0, forced), trip.dayCount - 1)
+            return
+        }
         if case .ongoing(let dayNumber) = trip.status {
             selectedDay = min(max(0, dayNumber - 1), trip.dayCount - 1)
         } else {
