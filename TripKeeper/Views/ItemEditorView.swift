@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import PhotosUI
+import UIKit
 
 /// 新建（existing == nil）或编辑行程条目，表单字段随类型变化。
 struct ItemEditorView: View {

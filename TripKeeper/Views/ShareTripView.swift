@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 /// 分享导出：文本行程单 + 行程长图。
 struct ShareTripView: View {

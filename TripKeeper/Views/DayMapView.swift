@@ -170,7 +170,7 @@ struct DayMapView: View {
                 HStack {
                     Label("连线总长", systemImage: "point.topleft.down.to.point.bottomright.curvepath")
                     Spacer()
-                    Text(String(format: "%.1f 公里", RoutePlanner.totalDistance(coordinates: polylineCoordinates) / 1000))
+                    Text(String(format: "%.1f 公里", RouteOptimizer.totalDistance(coordinates: polylineCoordinates) / 1000))
                         .foregroundStyle(.secondary)
                 }
                 .font(.footnote)
@@ -242,7 +242,7 @@ struct DayMapView: View {
     private func optimize() {
         let coordinates = orderedItems.compactMap(\.coordinate)
         guard coordinates.count == orderedItems.count, coordinates.count > 2 else { return }
-        let order = RoutePlanner.optimizeOrder(coordinates: coordinates)
+        let order = RouteOptimizer.optimizeOrder(coordinates: coordinates)
         orderedItems = order.map { orderedItems[$0] }
         Task { await recalcLegs() }
     }
