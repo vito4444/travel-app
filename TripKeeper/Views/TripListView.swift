@@ -8,6 +8,9 @@ struct TripListView: View {
     @State private var showingCreator = false
     @State private var tripToDelete: Trip?
     @State private var showDeleteConfirm = false
+    /// CI 截图用：`-openFirstTrip` 启动参数自动进入第一个行程。
+    @State private var autoOpenTrip: Trip?
+    @State private var autoOpened = false
 
     var body: some View {
         NavigationStack {
@@ -30,6 +33,17 @@ struct TripListView: View {
             }
             .sheet(isPresented: $showingCreator) {
                 TripEditorView(trip: nil)
+            }
+            .navigationDestination(item: $autoOpenTrip) { trip in
+                TripDetailView(trip: trip)
+            }
+            .onAppear {
+                if !autoOpened,
+                   ProcessInfo.processInfo.arguments.contains("-openFirstTrip"),
+                   let first = trips.first {
+                    autoOpened = true
+                    autoOpenTrip = first
+                }
             }
             .confirmationDialog(
                 "删除行程",

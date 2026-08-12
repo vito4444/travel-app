@@ -74,6 +74,12 @@ struct TripDetailView: View {
         .task {
             await loadWeather()
         }
+        .onAppear {
+            // CI 截图用：`-openMap` 启动参数直接打开路线规划页。
+            if ProcessInfo.processInfo.arguments.contains("-openMap") {
+                showMap = true
+            }
+        }
     }
 
     // MARK: - 顶部概览
