@@ -4,6 +4,8 @@ import CoreLocation
 
 @Model
 final class ItineraryItem {
+    /// 稳定标识，用于本地通知等跨启动引用。
+    var uid: String = UUID().uuidString
     var title: String = ""
     var typeRaw: String = ItemType.attraction.rawValue
     /// 属于行程的第几天（0 起）。
