@@ -6,6 +6,7 @@ import SwiftData
 struct DayMapView: View {
     let trip: Trip
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
 
     @State private var selectedDay = 0
     @State private var mode: RouteTransportMode = .driving
@@ -255,6 +256,9 @@ struct DayMapView: View {
         )
         withAnimation {
             showAppliedToast = true
+        }
+        Task { @MainActor in
+            await NotificationService.rescheduleAll(context: context)
         }
         Task {
             try? await Task.sleep(for: .seconds(2))

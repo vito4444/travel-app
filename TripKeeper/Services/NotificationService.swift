@@ -33,8 +33,9 @@ enum NotificationService {
         center.removePendingNotificationRequests(withIdentifiers: ourIDs)
 
         guard isEnabled else { return }
-        await requestAuthorization()
 
+        // 先收集待注册的提醒，有内容才申请通知权限，避免无谓弹窗。
+        var requests: [UNNotificationRequest] = []
         let trips = (try? context.fetch(FetchDescriptor<Trip>())) ?? []
         for trip in trips {
             for item in trip.items where item.type == .flight || item.type == .train {
@@ -54,13 +55,18 @@ enum NotificationService {
                     from: fireDate
                 )
                 let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
-                let request = UNNotificationRequest(
+                requests.append(UNNotificationRequest(
                     identifier: idPrefix + item.uid,
                     content: content,
                     trigger: trigger
-                )
-                try? await center.add(request)
+                ))
             }
+        }
+
+        guard !requests.isEmpty else { return }
+        await requestAuthorization()
+        for request in requests {
+            try? await center.add(request)
         }
     }
 }
