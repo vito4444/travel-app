@@ -1,0 +1,61 @@
+<view class="page-pad">
+  <view class="form-section-title">基本信息</view>
+  <view class="form-section">
+    <view class="form-row">
+      <view class="form-label">名称</view>
+      <input class="form-input" placeholder="如：五一成都行" value="{{name}}" data-field="name" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <view class="form-label">目的地</view>
+      <input class="form-input" placeholder="如：成都" value="{{destination}}" data-field="destination" bindinput="onInput" />
+    </view>
+    <view class="form-row" bindtap="onChooseDestination" hover-class="btn-hover">
+      <view class="form-label">目的地定位</view>
+      <view class="form-value">{{destLat != null ? '已设置 ✓（用于天气/地图）' : '地图选点（可选）>'}}</view>
+    </view>
+  </view>
+
+  <view class="form-section-title">日期</view>
+  <view class="form-section">
+    <view class="form-row">
+      <view class="form-label">出发</view>
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDate">
+        <view class="form-value">{{startDate}}</view>
+      </picker>
+    </view>
+    <view class="form-row">
+      <view class="form-label">返程</view>
+      <picker mode="date" value="{{endDate}}" start="{{startDate}}" bindchange="onEndDate">
+        <view class="form-value">{{endDate}}</view>
+      </picker>
+    </view>
+    <view class="form-row muted tiny">{{dayCountText}}</view>
+  </view>
+
+  <view class="form-section-title">封面色</view>
+  <view class="form-section">
+    <view class="color-row">
+      <block wx:for="{{colors}}" wx:key="*this">
+        <view
+          class="color-dot"
+          style="background: {{item}};"
+          bindtap="onPickColor"
+          data-color="{{item}}"
+        >{{item === colorHex ? '✓' : ''}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class="form-section-title">预算与备注（可选）</view>
+  <view class="form-section">
+    <view class="form-row">
+      <view class="form-label">总预算</view>
+      <input class="form-input" type="digit" placeholder="单位：元" value="{{budget}}" data-field="budget" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <textarea class="form-input-left" placeholder="签证、同行人等备注" value="{{notes}}" data-field="notes" bindinput="onInput" auto-height maxlength="200" />
+    </view>
+  </view>
+
+  <view class="btn-primary" hover-class="btn-hover" bindtap="onSave">保存</view>
+</view>

@@ -1,0 +1,7 @@
+.import-box {
+  width: 100%;
+  min-height: 220rpx;
+  font-size: 26rpx;
+  line-height: 1.6;
+  box-sizing: border-box;
+}

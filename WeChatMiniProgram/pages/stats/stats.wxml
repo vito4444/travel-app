@@ -1,0 +1,39 @@
+<view class="page-pad">
+  <view wx:if="{{!hasTrips}}" class="empty">
+    <view class="empty-icon">🗺️</view>
+    <view class="empty-title">还没有足迹</view>
+    <view>创建行程并添加带定位的安排后，这里会点亮你的足迹地图</view>
+  </view>
+
+  <block wx:else>
+    <view class="stat-row">
+      <view class="stat-card">
+        <view class="stat-icon">🧳</view>
+        <view class="stat-num">{{tripCount}}</view>
+        <view class="muted tiny">段旅程</view>
+      </view>
+      <view class="stat-card">
+        <view class="stat-icon">📅</view>
+        <view class="stat-num">{{totalDays}}</view>
+        <view class="muted tiny">天在路上</view>
+      </view>
+      <view class="stat-card">
+        <view class="stat-icon">📍</view>
+        <view class="stat-num">{{destinations.length}}</view>
+        <view class="muted tiny">个目的地</view>
+      </view>
+    </view>
+
+    <view class="map-card">
+      <map class="stats-map" markers="{{markers}}" include-points="{{includePoints}}" enable-zoom enable-scroll />
+      <view class="map-count">共 {{locatedCount}} 个打卡点</view>
+    </view>
+
+    <view wx:if="{{destinations.length > 0}}" class="day-header">去过的目的地</view>
+    <view class="dest-wrap">
+      <block wx:for="{{destinations}}" wx:key="*this">
+        <view class="dest-chip">{{item}}</view>
+      </block>
+    </view>
+  </block>
+</view>

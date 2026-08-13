@@ -1,0 +1,56 @@
+<view class="page-pad">
+  <view class="card">
+    <view class="muted tiny">总支出</view>
+    <view class="total-amount">{{totalText}}</view>
+    <progress wx:if="{{hasBudget}}" percent="{{percent}}" stroke-width="6" activeColor="{{overBudget ? '#e8574c' : '#1E7ADB'}}" backgroundColor="#f2f2f7" border-radius="4" style="margin-top: 10rpx;" />
+    <view class="muted tiny" style="margin-top: 10rpx; {{overBudget ? 'color:#e8574c;' : ''}}">{{budgetLine}}</view>
+  </view>
+
+  <view wx:if="{{categorySummary.length > 0}}" class="day-header">分类汇总</view>
+  <view wx:if="{{categorySummary.length > 0}}" class="card" style="padding: 8rpx 24rpx;">
+    <block wx:for="{{categorySummary}}" wx:key="key">
+      <view class="row-between" style="padding: 18rpx 0; border-bottom: 1rpx solid #f2f2f7;">
+        <view class="row">
+          <view style="margin-right: 14rpx;">{{item.icon}}</view>
+          <view style="font-size: 28rpx;">{{item.label}}</view>
+        </view>
+        <view style="font-size: 28rpx; color: {{item.color}}; font-weight: 600;">{{item.amountText}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="day-header">记一笔</view>
+  <view class="card">
+    <view class="row" style="margin-bottom: 16rpx;">
+      <input class="flex-1" type="digit" style="font-size: 32rpx;" placeholder="金额（元）" value="{{amount}}" data-field="amount" bindinput="onInput" />
+      <picker range="{{categoryLabels}}" value="{{categoryIndex}}" bindchange="onPickCategory">
+        <view class="chip chip-plain" style="margin: 0;">{{categoryLabels[categoryIndex]}}</view>
+      </picker>
+    </view>
+    <view class="row">
+      <input class="flex-1" style="font-size: 26rpx;" placeholder="备注（如：大熊猫基地门票）" value="{{note}}" data-field="note" bindinput="onInput" />
+      <picker mode="date" value="{{date}}" bindchange="onPickDate">
+        <view class="chip chip-plain" style="margin: 0 16rpx 0 0;">{{date}}</view>
+      </picker>
+      <view class="chip" style="margin: 0;" bindtap="onAdd">记账</view>
+    </view>
+  </view>
+
+  <view class="day-header">明细</view>
+  <view class="card" style="padding: 8rpx 24rpx;">
+    <view wx:if="{{expenses.length === 0}}" class="muted" style="padding: 20rpx 0;">还没有记账</view>
+    <block wx:for="{{expenses}}" wx:key="id">
+      <view class="row-between" style="padding: 18rpx 0; border-bottom: 1rpx solid #f2f2f7;" bindlongpress="onDeleteExpense" data-id="{{item.id}}">
+        <view class="row flex-1">
+          <view style="margin-right: 14rpx;">{{item.icon}}</view>
+          <view class="flex-1">
+            <view style="font-size: 28rpx;" class="ellipsis">{{item.title}}</view>
+            <view class="muted tiny">{{item.dateText}}</view>
+          </view>
+        </view>
+        <view style="font-size: 28rpx; font-weight: 600;">{{item.amountText}}</view>
+      </view>
+    </block>
+    <view wx:if="{{expenses.length > 0}}" class="muted tiny" style="padding: 14rpx 0;">长按记录可删除</view>
+  </view>
+</view>

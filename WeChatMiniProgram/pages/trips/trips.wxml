@@ -1,0 +1,32 @@
+<view class="page-pad">
+  <view wx:if="{{trips.length === 0}}" class="empty">
+    <view class="empty-icon">🧳</view>
+    <view class="empty-title">还没有行程</view>
+    <view>点下方按钮创建第一段旅程</view>
+    <view class="btn-primary" style="margin-top: 40rpx;" hover-class="btn-hover" bindtap="onCreate">新建行程</view>
+  </view>
+
+  <block wx:for="{{trips}}" wx:key="id">
+    <view
+      class="trip-card"
+      style="background: linear-gradient(135deg, {{item.colorHex}}, {{item.colorHex}}b8);"
+      hover-class="btn-hover"
+      bindtap="onOpenTrip"
+      bindlongpress="onLongPressTrip"
+      data-id="{{item.id}}"
+    >
+      <view class="row-between">
+        <view class="trip-name ellipsis">{{item.name}}</view>
+        <view class="trip-badge">{{item.statusText}}</view>
+      </view>
+      <view class="trip-dest">📍 {{item.destination}}</view>
+      <view class="row-between trip-meta">
+        <view>{{item.dateRange}} · {{item.dayCount}}天</view>
+        <view>{{item.itemCount}} 个安排</view>
+      </view>
+    </view>
+  </block>
+
+  <view wx:if="{{trips.length > 0}}" class="btn-primary" hover-class="btn-hover" bindtap="onCreate" style="margin-top: 8rpx;">＋ 新建行程</view>
+  <view wx:if="{{trips.length > 0}}" class="muted tiny" style="text-align:center; margin-top: 16rpx;">长按卡片可编辑或删除</view>
+</view>

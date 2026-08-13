@@ -1,0 +1,148 @@
+<view class="page-pad">
+  <view class="form-section">
+    <view class="form-row">
+      <view class="form-label">类型</view>
+      <picker range="{{typeLabels}}" value="{{typeIndex}}" data-field="typeIndex" bindchange="onPickerChange">
+        <view class="form-value">{{typeLabels[typeIndex]}} ></view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="form-section-title">基本信息</view>
+  <view class="form-section">
+    <view class="form-row">
+      <view class="form-label">标题</view>
+      <input class="form-input" placeholder="{{titlePlaceholder}}" value="{{title}}" data-field="title" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <view class="form-label">日期</view>
+      <picker range="{{dayOptions}}" value="{{dayIndex}}" data-field="dayIndex" bindchange="onPickerChange">
+        <view class="form-value">{{dayOptions[dayIndex]}} ></view>
+      </picker>
+    </view>
+    <view class="form-row">
+      <view class="form-label">开始时间</view>
+      <view class="row">
+        <picker mode="time" value="{{startTime || '09:00'}}" data-field="startTime" bindchange="onTimeChange">
+          <view class="form-value">{{startTime || '未设置 >'}}</view>
+        </picker>
+        <view wx:if="{{startTime}}" class="clear-x" data-field="startTime" catchtap="onClearTime">✕</view>
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">结束时间</view>
+      <view class="row">
+        <picker mode="time" value="{{endTime || '10:00'}}" data-field="endTime" bindchange="onTimeChange">
+          <view class="form-value">{{endTime || '未设置 >'}}</view>
+        </picker>
+        <view wx:if="{{endTime}}" class="clear-x" data-field="endTime" catchtap="onClearTime">✕</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-section-title">地点</view>
+  <view class="form-section">
+    <view class="form-row" hover-class="btn-hover" bindtap="onChooseLocation">
+      <view class="form-label">🔍 地图选点</view>
+      <view class="form-value">{{locationName || '搜索并选择地点 >'}}</view>
+    </view>
+    <view wx:if="{{address}}" class="form-row muted tiny">{{address}}</view>
+    <view wx:if="{{lat != null || locationName}}" class="form-row" bindtap="onClearLocation">
+      <view style="color: #e8574c; font-size: 24rpx;">清除地点</view>
+    </view>
+  </view>
+
+  <block wx:if="{{isPointToPoint}}">
+    <view class="form-section-title">班次信息</view>
+    <view class="form-section">
+      <view class="form-row">
+        <view class="form-label">班次号</view>
+        <input class="form-input" placeholder="如 CA4102 / G89" value="{{transportNumber}}" data-field="transportNumber" bindinput="onInput" />
+      </view>
+      <view class="form-row">
+        <view class="form-label">出发地</view>
+        <input class="form-input" placeholder="如 北京首都T3" value="{{departurePlace}}" data-field="departurePlace" bindinput="onInput" />
+      </view>
+      <view class="form-row">
+        <view class="form-label">到达地</view>
+        <input class="form-input" placeholder="如 成都天府T1" value="{{arrivalPlace}}" data-field="arrivalPlace" bindinput="onInput" />
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{isHotel}}">
+    <view class="form-section-title">入住信息</view>
+    <view class="form-section">
+      <view class="form-row">
+        <view class="form-label">入住日期</view>
+        <picker mode="date" value="{{checkInDate}}" data-field="checkInDate" bindchange="onDateChange">
+          <view class="form-value">{{checkInDate || '选择 >'}}</view>
+        </picker>
+      </view>
+      <view class="form-row">
+        <view class="form-label">退房日期</view>
+        <picker mode="date" value="{{checkOutDate}}" start="{{checkInDate}}" data-field="checkOutDate" bindchange="onDateChange">
+          <view class="form-value">{{checkOutDate || '选择 >'}}</view>
+        </picker>
+      </view>
+    </view>
+  </block>
+
+  <view class="form-section-title">费用</view>
+  <view class="form-section">
+    <view class="form-row">
+      <view class="form-label">金额</view>
+      <input class="form-input" type="digit" placeholder="门票/房费/票价（元）" value="{{price}}" data-field="price" bindinput="onInput" />
+    </view>
+  </view>
+
+  <view class="form-section-title">预订信息</view>
+  <view class="form-section">
+    <view class="form-row">
+      <view class="form-label">预订平台</view>
+      <picker range="{{platformLabels}}" value="{{platformIndex}}" data-field="platformIndex" bindchange="onPickerChange">
+        <view class="form-value">{{platformLabels[platformIndex]}} ></view>
+      </picker>
+    </view>
+    <view wx:if="{{platformLabels[platformIndex] === '自定义'}}" class="form-row">
+      <view class="form-label">平台名称</view>
+      <input class="form-input" placeholder="如 官网、酒店直订" value="{{customPlatformName}}" data-field="customPlatformName" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <view class="form-label">订单号</view>
+      <input class="form-input" placeholder="用于一键复制查单" value="{{orderNumber}}" data-field="orderNumber" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <view class="form-label">联系电话</view>
+      <input class="form-input" type="number" placeholder="酒店/客服电话" value="{{phoneNumber}}" data-field="phoneNumber" bindinput="onInput" />
+    </view>
+    <view class="form-row">
+      <view class="form-label">小程序链接</view>
+      <input class="form-input" placeholder="对方小程序菜单→复制链接" value="{{bookingShortLink}}" data-field="bookingShortLink" bindinput="onInput" />
+    </view>
+    <view class="form-row muted tiny">保存后卡片出现「打开平台 / 打电话 / 复制订单号」按钮；粘贴小程序链接可一键直跳任意平台改单退订。</view>
+  </view>
+
+  <view class="form-section-title">附件（票据/证件截图，最多 5 张）</view>
+  <view class="form-section">
+    <view class="photo-row">
+      <block wx:for="{{photos}}" wx:key="*this">
+        <view class="photo-thumb-wrap">
+          <image class="photo-thumb" src="{{item}}" mode="aspectFill" data-src="{{item}}" bindtap="onPreviewPhoto" />
+          <view class="photo-del" data-src="{{item}}" catchtap="onDeletePhoto">✕</view>
+        </view>
+      </block>
+      <view class="photo-add" bindtap="onAddPhotos">＋</view>
+    </view>
+  </view>
+
+  <view class="form-section-title">备注</view>
+  <view class="form-section">
+    <view class="form-row">
+      <textarea class="form-input-left" placeholder="取票口、预约码、注意事项…" value="{{notes}}" data-field="notes" bindinput="onInput" auto-height maxlength="500" />
+    </view>
+  </view>
+
+  <view class="btn-primary" hover-class="btn-hover" bindtap="onSave">保存</view>
+  <view wx:if="{{itemId}}" class="btn-danger-text" bindtap="onDelete">删除此条目</view>
+</view>

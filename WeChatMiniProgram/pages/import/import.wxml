@@ -1,0 +1,36 @@
+<view class="page-pad">
+  <view class="form-section-title">粘贴订票短信 / 确认信息</view>
+  <view class="card">
+    <textarea class="import-box" placeholder="把 12306 购票短信、平台的航班/酒店确认短信粘到这里…" value="{{text}}" bindinput="onInput" maxlength="1000" />
+    <view class="row" style="margin-top: 12rpx;">
+      <view class="chip chip-plain" bindtap="onSample" data-kind="train">火车票示例</view>
+      <view class="chip chip-plain" bindtap="onSample" data-kind="flight">航班示例</view>
+      <view class="chip chip-plain" bindtap="onSample" data-kind="hotel">酒店示例</view>
+    </view>
+    <view class="muted tiny" style="margin-top: 12rpx;">本机离线解析，不上传任何内容。</view>
+  </view>
+
+  <view class="btn-primary" hover-class="btn-hover" bindtap="onParse">解析</view>
+  <view wx:if="{{parseFailed}}" class="card" style="margin-top: 20rpx; color: #b25000; font-size: 24rpx;">
+    未能识别这段文本。目前支持含车次 / 航班号 / 酒店名的确认信息，也可以回详情页手动添加条目。
+  </view>
+
+  <block wx:if="{{parsed}}">
+    <view class="day-header">解析结果</view>
+    <view class="card" style="padding: 8rpx 24rpx;">
+      <block wx:for="{{parsedRows}}" wx:key="label">
+        <view class="row-between" style="padding: 16rpx 0; border-bottom: 1rpx solid #f2f2f7;">
+          <view class="muted">{{item.label}}</view>
+          <view style="font-size: 27rpx; max-width: 65%; text-align: right;">{{item.value}}</view>
+        </view>
+      </block>
+      <view class="row-between" style="padding: 16rpx 0;">
+        <view class="muted">添加到</view>
+        <picker range="{{dayOptions}}" value="{{targetDay}}" bindchange="onPickDay">
+          <view style="font-size: 27rpx; color: #1E7ADB;">{{dayOptions[targetDay]}} ></view>
+        </picker>
+      </view>
+    </view>
+    <view class="btn-primary" hover-class="btn-hover" bindtap="onAdd">＋ 添加到行程</view>
+  </block>
+</view>

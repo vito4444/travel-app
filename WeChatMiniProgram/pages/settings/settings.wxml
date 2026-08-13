@@ -1,0 +1,39 @@
+<view class="page-pad">
+  <view class="form-section-title">支持跳转的预订平台</view>
+  <view class="form-section">
+    <block wx:for="{{platforms}}" wx:key="key">
+      <view class="form-row">
+        <view class="form-label">{{item.label}}</view>
+        <view class="form-value tiny">{{item.jumpText}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="muted tiny" style="padding: 0 8rpx 20rpx;">
+    条目关联平台后，卡片上会出现「打开平台」按钮。任意平台都可以在条目编辑里粘贴对方小程序的「复制链接」（对方小程序右上角菜单 → 复制链接）实现一键直跳改单退订；未配置链接时会自动复制订单号便于粘贴查单。
+  </view>
+
+  <view class="form-section-title">与 iOS 版的差异说明</view>
+  <view class="form-section">
+    <view class="form-row muted tiny">微信不支持唤起外部 App，跳转目标为各平台小程序。</view>
+    <view class="form-row muted tiny">微信无本地通知能力，出发提醒功能不提供，请以行程页倒计时为准。</view>
+    <view class="form-row muted tiny">条目排序用「调整顺序」里的上移/下移完成。</view>
+    <view class="form-row muted tiny">路线各段交通时长为直线距离估算值，已在页面标注。</view>
+  </view>
+
+  <view class="form-section-title">关于</view>
+  <view class="form-section">
+    <view class="form-row">
+      <view class="form-label">版本</view>
+      <view class="form-value">1.0</view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">数据存储</view>
+      <view class="form-value">仅本机（微信本地缓存）</view>
+    </view>
+    <view class="form-row">
+      <view class="form-label">天气数据</view>
+      <view class="form-value">Open-Meteo</view>
+    </view>
+  </view>
+  <view class="muted tiny" style="padding: 0 8rpx;">行程管家：行程规划 · 路线优化 · 预订管理，数据不出本机。</view>
+</view>

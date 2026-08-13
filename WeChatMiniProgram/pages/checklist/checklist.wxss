@@ -1,0 +1,40 @@
+.check-row {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f2f2f7;
+}
+
+.check-row:last-child {
+  border-bottom: none;
+}
+
+.check-circle {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  border: 3rpx solid #c7c7cc;
+  margin-right: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.check-circle-on {
+  background: #2FA35C;
+  border-color: #2FA35C;
+}
+
+.check-done {
+  color: #8e8e93;
+  text-decoration: line-through;
+}
+
+.check-del {
+  color: #c7c7cc;
+  padding: 10rpx 4rpx 10rpx 20rpx;
+  font-size: 26rpx;
+}
