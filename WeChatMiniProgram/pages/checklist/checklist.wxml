@@ -1,0 +1,37 @@
+<view class="page-pad">
+  <view class="card">
+    <view class="row-between">
+      <view class="card-title" style="margin-bottom: 0;">{{total === 0 ? '清单为空' : '已完成 ' + done + '/' + total}}</view>
+      <view wx:if="{{total > 0 && done === total}}" style="color: #2FA35C; font-size: 24rpx;">✓ 全部就绪</view>
+      <view wx:else class="chip chip-plain" style="margin: 0;" bindtap="onImportTemplate">导入模板</view>
+    </view>
+    <progress wx:if="{{total > 0}}" percent="{{percent}}" stroke-width="6" activeColor="#1E7ADB" backgroundColor="#f2f2f7" border-radius="4" style="margin-top: 16rpx;" />
+    <view wx:if="{{total === 0}}" class="muted tiny" style="margin-top: 12rpx;">点「导入模板」一键加入证件、电子、衣物、洗漱、药品五类常用物品。</view>
+  </view>
+
+  <block wx:for="{{groups}}" wx:key="category" wx:for-item="group">
+    <view class="day-header">{{group.category}}</view>
+    <view class="card" style="padding: 8rpx 24rpx;">
+      <block wx:for="{{group.items}}" wx:key="id">
+        <view class="check-row">
+          <view class="row flex-1" bindtap="onToggle" data-id="{{item.id}}">
+            <view class="check-circle {{item.done ? 'check-circle-on' : ''}}">{{item.done ? '✓' : ''}}</view>
+            <view class="{{item.done ? 'check-done' : ''}}" style="font-size: 28rpx;">{{item.title}}</view>
+          </view>
+          <view class="check-del" bindtap="onDelete" data-id="{{item.id}}">✕</view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <view class="day-header">添加物品</view>
+  <view class="card">
+    <view class="row">
+      <input class="flex-1" style="font-size: 28rpx;" placeholder="物品名称" value="{{newTitle}}" bindinput="onInputTitle" />
+      <picker range="{{categories}}" value="{{newCategoryIndex}}" bindchange="onPickCategory">
+        <view class="chip chip-plain" style="margin: 0 16rpx 0 0;">{{categories[newCategoryIndex]}}</view>
+      </picker>
+      <view class="chip" style="margin: 0;" bindtap="onAdd">添加</view>
+    </view>
+  </view>
+</view>

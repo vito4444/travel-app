@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>行程管家</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>ctrip</string>
+		<string>qunarphone</string>
+		<string>taobaotravel</string>
+		<string>cn.12306</string>
+		<string>imeituan</string>
+		<string>dianping</string>
+		<string>eltclient</string>
+		<string>diditaxi</string>
+		<string>umetrip</string>
+		<string>iosamap</string>
+		<string>baidumap</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>用于在地图上显示您的当前位置，辅助规划每日路线。</string>
+</dict>
+</plist>

@@ -1,0 +1,73 @@
+<view class="page-pad">
+  <!-- 概览 -->
+  <view class="card">
+    <view class="row-between">
+      <view class="row flex-1">
+        <text>📍 </text>
+        <text class="card-title ellipsis" style="margin-bottom: 0;">{{destination}}</text>
+      </view>
+      <view class="status-badge" style="background: {{colorHex}}22; color: {{colorHex}};">{{statusText}}</view>
+    </view>
+    <view class="muted" style="margin-top: 10rpx;">{{dateText}}</view>
+    <view wx:if="{{budgetLine}}" class="muted" style="margin-top: 6rpx;">{{budgetLine}}</view>
+    <view wx:if="{{notes}}" class="muted" style="margin-top: 6rpx;">{{notes}}</view>
+
+    <view class="tool-grid">
+      <view class="tool-btn" hover-class="btn-hover" bindtap="onOpenTool" data-tool="map">🗺️ 地图规划</view>
+      <view class="tool-btn" hover-class="btn-hover" bindtap="onOpenTool" data-tool="checklist">✅ 行前清单</view>
+      <view class="tool-btn" hover-class="btn-hover" bindtap="onOpenTool" data-tool="budget">💰 预算记账</view>
+      <view class="tool-btn" hover-class="btn-hover" bindtap="onOpenTool" data-tool="import">📥 智能导入</view>
+      <view class="tool-btn" hover-class="btn-hover" bindtap="onOpenTool" data-tool="share">📤 分享导出</view>
+      <view class="tool-btn" hover-class="btn-hover" bindtap="onOpenTool" data-tool="settings">⚙️ 行程设置</view>
+    </view>
+  </view>
+
+  <view class="row-between" style="padding: 0 8rpx;">
+    <view class="muted tiny">点条目编辑 · 长按更多操作</view>
+    <view class="edit-toggle" bindtap="onToggleEdit">{{editMode ? '完成排序' : '调整顺序'}}</view>
+  </view>
+
+  <!-- 每日时间轴 -->
+  <block wx:for="{{days}}" wx:key="index" wx:for-item="day">
+    <view class="day-header">
+      <view>{{day.title}}</view>
+      <view class="weather-badge">{{day.weather ? day.weather.icon + ' ' + day.weather.tempText : '—'}}</view>
+    </view>
+
+    <view class="card" style="padding: 8rpx 24rpx;">
+      <view wx:if="{{day.items.length === 0}}" class="muted" style="padding: 20rpx 0;">暂无安排</view>
+
+      <block wx:for="{{day.items}}" wx:key="id" wx:for-item="item" wx:for-index="pos">
+        <view class="item-row" hover-class="btn-hover" bindtap="onTapItem" bindlongpress="onLongPressItem" data-item="{{item.id}}">
+          <view class="item-time">
+            <view class="item-time-start">{{item.startTime}}</view>
+            <view wx:if="{{item.endTime}}" class="item-time-end">{{item.endTime}}</view>
+          </view>
+          <view class="item-icon" style="background: {{item.color}}26;">{{item.icon}}</view>
+          <view class="flex-1">
+            <view class="row-between">
+              <view class="item-title ellipsis">{{item.title}}</view>
+              <view class="type-badge" style="background: {{item.color}}1f; color: {{item.color}};">{{item.typeLabel}}</view>
+            </view>
+            <view wx:if="{{item.subtitle}}" class="muted tiny ellipsis" style="margin-top: 4rpx;">{{item.subtitle}}</view>
+            <view wx:if="{{item.bookingLine}}" class="muted tiny ellipsis" style="margin-top: 4rpx;">{{item.bookingLine}}</view>
+
+            <view wx:if="{{item.canOpenPlatform || item.hasPhone || item.hasOrder}}" class="chips-row">
+              <view wx:if="{{item.canOpenPlatform}}" class="chip" style="background: {{item.color}}1a; color: {{item.color}};" catchtap="onOpenPlatform" data-item="{{item.id}}">↗ 打开{{item.platformLabel || '预订小程序'}}</view>
+              <view wx:if="{{item.hasPhone}}" class="chip" style="background: {{item.color}}1a; color: {{item.color}};" catchtap="onCall" data-item="{{item.id}}">📞 打电话</view>
+              <view wx:if="{{item.hasOrder}}" class="chip" style="background: {{item.color}}1a; color: {{item.color}};" catchtap="onCopyOrder" data-item="{{item.id}}">⧉ 复制订单号</view>
+            </view>
+          </view>
+
+          <view wx:if="{{editMode}}" class="sort-col">
+            <view class="sort-btn" catchtap="onMove" data-day="{{day.index}}" data-pos="{{pos}}" data-dir="up">↑</view>
+            <view class="sort-btn" catchtap="onMove" data-day="{{day.index}}" data-pos="{{pos}}" data-dir="down">↓</view>
+            <view class="sort-btn sort-del" catchtap="onDeleteItem" data-item="{{item.id}}">✕</view>
+          </view>
+        </view>
+      </block>
+
+      <view class="add-row" hover-class="btn-hover" bindtap="onAddItem" data-day="{{day.index}}">＋ 添加安排</view>
+    </view>
+  </block>
+</view>

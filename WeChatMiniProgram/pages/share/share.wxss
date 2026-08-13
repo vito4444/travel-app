@@ -1,0 +1,34 @@
+.poster {
+  width: 686rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.share-bar {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: 120rpx;
+  display: flex;
+}
+
+.share-tip {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: 30rpx;
+}
+
+.share-friend-btn {
+  background: #ffffff;
+  color: #2FA35C;
+  font-size: 28rpx;
+  font-weight: 600;
+  border-radius: 20rpx;
+  line-height: 2.4;
+}
+
+.share-friend-btn::after {
+  border: none;
+}

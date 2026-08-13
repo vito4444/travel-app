@@ -1,0 +1,32 @@
+.trip-card {
+  border-radius: 28rpx;
+  padding: 28rpx;
+  margin-bottom: 22rpx;
+  color: #ffffff;
+}
+
+.trip-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  max-width: 65%;
+}
+
+.trip-badge {
+  font-size: 22rpx;
+  font-weight: 600;
+  padding: 6rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.trip-dest {
+  margin-top: 14rpx;
+  font-size: 27rpx;
+  opacity: 0.95;
+}
+
+.trip-meta {
+  margin-top: 12rpx;
+  font-size: 23rpx;
+  opacity: 0.88;
+}

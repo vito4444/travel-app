@@ -1,0 +1,6 @@
+.total-amount {
+  font-size: 64rpx;
+  font-weight: 800;
+  margin: 8rpx 0;
+  font-variant-numeric: tabular-nums;
+}

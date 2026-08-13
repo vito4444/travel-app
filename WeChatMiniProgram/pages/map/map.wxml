@@ -1,0 +1,60 @@
+<view class="map-page">
+  <scroll-view scroll-x class="day-scroll" enhanced show-scrollbar="{{false}}">
+    <block wx:for="{{days}}" wx:key="index">
+      <view
+        class="day-chip {{item.index === selectedDay ? 'day-chip-active' : ''}}"
+        style="{{item.index === selectedDay ? 'background:' + colorHex + ';' : ''}}"
+        bindtap="onPickDay"
+        data-day="{{item.index}}"
+      >
+        <view class="day-chip-title">{{item.label}}</view>
+        <view class="day-chip-date">{{item.dateLabel}}</view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view class="map-wrap">
+    <map
+      wx:if="{{!isEmpty}}"
+      class="the-map"
+      markers="{{markers}}"
+      polyline="{{polyline}}"
+      include-points="{{includePoints}}"
+      show-location
+    />
+    <view wx:else class="empty" style="padding-top: 200rpx;">
+      <view class="empty-icon">🗺️</view>
+      <view class="empty-title">本日暂无含定位的条目</view>
+      <view>在条目编辑里地图选点后，这里会出现标记与路线</view>
+    </view>
+  </view>
+
+  <view class="controls">
+    <view class="mode-seg">
+      <view class="mode-btn {{mode === 'driving' ? 'mode-btn-active' : ''}}" bindtap="onPickMode" data-mode="driving">🚗 驾车</view>
+      <view class="mode-btn {{mode === 'walking' ? 'mode-btn-active' : ''}}" bindtap="onPickMode" data-mode="walking">🚶 步行</view>
+    </view>
+    <view class="ctl-btn" hover-class="btn-hover" bindtap="onOptimize">✨ 优化顺序</view>
+    <view class="ctl-btn ctl-btn-primary" style="background: {{colorHex}};" hover-class="btn-hover" bindtap="onApply">✓ 应用到行程</view>
+  </view>
+
+  <scroll-view scroll-y class="leg-panel">
+    <view wx:if="{{totalKm}}" class="row-between leg-row">
+      <view class="muted">连线总长</view>
+      <view>{{totalKm}} 公里</view>
+    </view>
+    <block wx:for="{{legs}}" wx:key="seq">
+      <view class="row-between leg-row">
+        <view class="row flex-1">
+          <view class="leg-seq">{{item.seq}}</view>
+          <view class="ellipsis" style="font-size: 26rpx;">{{item.toTitle}}</view>
+        </view>
+        <view class="row">
+          <view style="font-size: 26rpx;">{{item.text}}</view>
+          <view class="estimate-tag">估算</view>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{legs.length > 0}}" class="muted tiny" style="padding: 12rpx 24rpx 24rpx;">交通时长按直线距离估算（驾车 30km/h、步行 4.5km/h），仅供排程参考。</view>
+  </scroll-view>
+</view>

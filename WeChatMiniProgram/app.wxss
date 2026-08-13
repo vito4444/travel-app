@@ -1,0 +1,194 @@
+/* 全局样式：与 iOS 版同一套设计语言（圆角卡片、类型色 chip）。 */
+
+page {
+  background: #f5f6f8;
+  font-size: 28rpx;
+  color: #1c1c1e;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+.page-pad {
+  padding: 24rpx;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.muted {
+  color: #8e8e93;
+  font-size: 24rpx;
+}
+
+.tiny {
+  font-size: 22rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-1 {
+  flex: 1;
+  min-width: 0;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 操作小按钮（打开小程序/打电话/复制订单号等） */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  margin-right: 12rpx;
+  margin-top: 10rpx;
+  background: rgba(30, 122, 219, 0.10);
+  color: #1E7ADB;
+}
+
+.chip-plain {
+  background: #f2f2f7;
+  color: #3a3a3c;
+}
+
+/* 主按钮 */
+.btn-primary {
+  background: #1E7ADB;
+  color: #ffffff;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  padding: 18rpx 0;
+  text-align: center;
+}
+
+.btn-secondary {
+  background: #eef3fb;
+  color: #1E7ADB;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  padding: 18rpx 0;
+  text-align: center;
+}
+
+.btn-danger-text {
+  color: #e8574c;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+}
+
+.btn-hover {
+  opacity: 0.75;
+}
+
+/* 表单 */
+.form-section {
+  background: #ffffff;
+  border-radius: 24rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.form-section-title {
+  font-size: 24rpx;
+  color: #8e8e93;
+  padding: 20rpx 24rpx 8rpx;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22rpx 24rpx;
+  border-bottom: 1rpx solid #f2f2f7;
+  font-size: 28rpx;
+}
+
+.form-row:last-child {
+  border-bottom: none;
+}
+
+.form-label {
+  color: #1c1c1e;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.form-input {
+  flex: 1;
+  text-align: right;
+  font-size: 28rpx;
+}
+
+.form-input-left {
+  flex: 1;
+  text-align: left;
+  font-size: 28rpx;
+}
+
+.form-value {
+  color: #8e8e93;
+  max-width: 60%;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 140rpx 60rpx;
+  color: #8e8e93;
+}
+
+.empty-icon {
+  font-size: 88rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #3a3a3c;
+  margin-bottom: 10rpx;
+}
+
+/* 天气徽标 */
+.weather-badge {
+  font-size: 22rpx;
+  color: #636366;
+}
+
+/* 段落分组头 */
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26rpx 8rpx 12rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #3a3a3c;
+}

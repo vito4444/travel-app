@@ -1,0 +1,16 @@
+<view class="page-pad" style="padding-bottom: 160rpx;">
+  <canvas
+    type="2d"
+    id="poster"
+    class="poster"
+    style="height: {{canvasStyleHeight}}px;"
+  />
+
+  <view class="share-bar">
+    <view class="btn-secondary flex-1" style="margin-right: 16rpx;" hover-class="btn-hover" bindtap="onCopyText">复制文本行程单</view>
+    <view class="btn-primary flex-1" hover-class="btn-hover" bindtap="onSaveImage">{{ready ? '保存长图到相册' : '长图生成中…'}}</view>
+  </view>
+  <view class="share-tip">
+    <button class="share-friend-btn" open-type="share">📤 转发给同行好友</button>
+  </view>
+</view>

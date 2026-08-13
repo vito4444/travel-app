@@ -1,0 +1,51 @@
+.clear-x {
+  margin-left: 16rpx;
+  color: #8e8e93;
+  font-size: 24rpx;
+  padding: 4rpx 10rpx;
+}
+
+.photo-row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx 24rpx;
+}
+
+.photo-thumb-wrap {
+  position: relative;
+  margin-right: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.photo-thumb {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 14rpx;
+}
+
+.photo-del {
+  position: absolute;
+  top: -12rpx;
+  right: -12rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-add {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 14rpx;
+  background: #f2f2f7;
+  color: #8e8e93;
+  font-size: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

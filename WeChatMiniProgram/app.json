@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/trips/trips",
+    "pages/detail/detail",
+    "pages/itemEdit/itemEdit",
+    "pages/tripEdit/tripEdit",
+    "pages/map/map",
+    "pages/checklist/checklist",
+    "pages/budget/budget",
+    "pages/import/import",
+    "pages/share/share",
+    "pages/stats/stats",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "行程管家",
+    "backgroundColor": "#f5f6f8",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#8e8e93",
+    "selectedColor": "#1E7ADB",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/trips/trips", "text": "行程" },
+      { "pagePath": "pages/stats/stats", "text": "足迹" },
+      { "pagePath": "pages/settings/settings", "text": "设置" }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于在地图上选择行程地点与展示路线"
+    }
+  },
+  "requiredPrivateInfos": ["chooseLocation", "getLocation"],
+  "navigateToMiniProgramAppIdList": ["wx0e6ed4f51db9d078"],
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}
