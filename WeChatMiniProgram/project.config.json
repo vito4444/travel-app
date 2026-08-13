@@ -1,0 +1,16 @@
+{
+  "description": "行程管家 TripKeeper 微信小程序版",
+  "appid": "touristappid",
+  "compileType": "miniprogram",
+  "libVersion": "3.0.0",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "urlCheck": false,
+    "coverView": true,
+    "ignoreUploadUnusedFiles": true
+  },
+  "projectname": "TripKeeper-MiniProgram"
+}
